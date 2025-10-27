@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import QApplication, QLineEdit, QWidget, QLabel, QPushButto
 from PyQt6.QtCore import QTimer
 
 from config import LEAGUE_LIVE_API, BACKEND_API
+from utils import league_live_api, send_to_backend
 
 
 class MainWindow(QMainWindow):
@@ -200,7 +201,9 @@ class MainWindow(QMainWindow):
             self.show_notification("Please connect first before starting stream", "warning")
 
     def call_api(self):
-        print("Calling API...")
+        data = league_live_api()
+        if (data.is_success()):
+            send_to_backend(data.data)
 
     def update_stream_button_style(self):
         if self.is_streaming:
