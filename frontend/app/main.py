@@ -1,7 +1,9 @@
 import sys
+import requests
 from PyQt6.QtWidgets import QApplication, QLineEdit, QWidget, QLabel, QPushButton, QVBoxLayout, QMainWindow
 from PyQt6.QtCore import QTimer
 
+from config import LEAGUE_LIVE_API, BACKEND_API
 
 
 class MainWindow(QMainWindow):
@@ -27,7 +29,6 @@ class MainWindow(QMainWindow):
 
         layout.addWidget(QLabel("Live Game Stream"))
 
-        # Notification/Status area
         self.notification_label = QLabel("")
         self.notification_label.setWordWrap(True)
         self.notification_label.setMinimumHeight(40)
@@ -39,7 +40,7 @@ class MainWindow(QMainWindow):
                 background-color: transparent;
             }
         """)
-        self.notification_label.hide()  # Hidden by default
+        self.notification_label.hide()
         layout.addWidget(self.notification_label)
         layout.addSpacing(5)
 
