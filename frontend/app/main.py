@@ -14,7 +14,6 @@ class MainWindow(QMainWindow):
         # Runtime Variables
         self.is_connected = False
         self.is_streaming = False
-        self.player_username = ""
         self.secret_token = ""
 
         self.api_timer = QTimer()
@@ -45,27 +44,8 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.notification_label)
         layout.addSpacing(5)
 
-        username_label = QLabel("League Username:")
-        username_label.setStyleSheet("margin-bottom: 0px; font-weight: bold;")
-        layout.addWidget(username_label)
-
-        self.username_input = QLineEdit()
-        self.username_input.setPlaceholderText("Enter your League username")
-        self.username_input.setStyleSheet("""
-            QLineEdit {
-                padding: 8px;
-                border: 2px solid #ddd;
-                border-radius: 4px;
-                font-size: 13px;
-            }
-            QLineEdit:focus {
-                border: 2px solid #0078d4;
-            }
-        """)
-        layout.addWidget(self.username_input)
-
         token_label = QLabel("Secret Token:")
-        token_label.setStyleSheet("margin-bottom: 0px; font-weight: bold;")
+        token_label.setStyleSheet("margin-bottom: -32px; font-weight: bold;")
         layout.addWidget(token_label)
 
         self.token_input = QLineEdit()
@@ -172,16 +152,15 @@ class MainWindow(QMainWindow):
         self.notification_label.hide()
 
     def on_connect(self):
-        self.player_username = self.username_input.text()
         self.secret_token = self.token_input.text()
 
-        if not self.player_username or not self.secret_token:
+        if not self.secret_token:
             self.show_notification("Please enter both username and token", "error")
             return
 
         self.is_connected = True
-        self.show_notification(f"Connected as {self.player_username}", "success")
-        print(f"Connect clicked - Username: {self.player_username}, Token: {'*' * len(self.secret_token)}")
+        self.show_notification(f"Connected to socket", "success")
+        print(f"Token: {'*' * len(self.secret_token)}")
 
     def toggle_stream(self):
         if self.is_connected:
@@ -203,7 +182,7 @@ class MainWindow(QMainWindow):
     def call_api(self):
         data = league_live_api()
         if (data.is_success()):
-            send_to_backend(data.data)
+            send_to_backend(data.data, self.secret_token)
 
     def update_stream_button_style(self):
         if self.is_streaming:

@@ -11,6 +11,10 @@ def league_live_api() -> Result:
         response.raise_for_status()
 
         data = response.json()
+
+        # test print
+        print(data['activePlayer']['currentGold'])
+
         return Result.success(data=data)
     except Exception as e:
         return Result.failure(error=f"Failed to fetch API: {str(e)}")
