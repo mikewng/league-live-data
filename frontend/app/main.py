@@ -16,10 +16,12 @@ class MainWindow(QMainWindow):
         self.is_streaming = False
         self.secret_token = ""
 
+        # Timer for Sleeping on Loop
         self.api_timer = QTimer()
         self.api_timer.timeout.connect(self.call_api)
         self.api_timer.setInterval(2000)
 
+        # PyQt UI Components
         self.setWindowTitle("League Live Game Connector")
         self.resize(300, 400)
 
