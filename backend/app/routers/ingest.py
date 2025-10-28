@@ -64,8 +64,6 @@ async def ingest_game_json(payload: GameDataPayload):
     if not memory.current_session.isActive:
         raise HTTPException(status_code=403, detail="Session is not active")
 
-    # Update in-memory data of league game with payload
-
     return {
         "message": "Data ingested successfully",
         "user": memory.current_session.user,
