@@ -6,8 +6,8 @@ This is a simple and goofy application that reads a person's live game data and 
 - Discord bot that uses TTS to relay ai text from backend via websockets
 
 TO DO:
-1. Add an onChange-Like function that detects changes in major live game data stats
-2. Integrate OpenAI agents or just regular chat API service functionality that fires every time there is a change
+1. Add an onChange-Like function that detects changes in major live game data stats - DONE
+2. Integrate OpenAI agents or just regular chat API service functionality that fires every time there is a change - DONE
 3. Send output to discord bot via websocket
     - Implement TTS functionality for bot
 4. Add op.gg MVC to check champion matchups for better context
