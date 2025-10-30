@@ -58,7 +58,7 @@ async def handle_game_changes(changes: List) -> None:
     full_prompt = (
         f"The following events just happened in the game:\n\n"
         f"{combined_prompt}\n\n"
-        f"Give a brief, snarky commentary on what just happened. "
+        f"Give a brief, snarky commentary on what just happened. Prioritizing on suggesting item builds."
         f"Be mean but helpful. Keep it short and punchy."
     )
 
