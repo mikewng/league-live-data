@@ -24,6 +24,11 @@ TO DO:
 ## Back End (Development)
 1. python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
+## Back End (Turn into .exe Application)
+1. cd frontend
+2. pip install pyinstaller
+3. pyinstaller league_live_connector.spec
+
 # Application Flow Chart
 <img width="1485" height="673" alt="image" src="https://github.com/user-attachments/assets/bd09e891-8caf-4339-9a0f-6e066e282da1" />
 
