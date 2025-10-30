@@ -1,13 +1,13 @@
 from typing import List
 import os
 from app.core.config import Settings
+import app.core.memory_data as memory
 
 settings = Settings()
 
 openai_api_key = settings.OPENAI_API_KEY
 openai_model = settings.OPENAI_MODEL
 
-# Set the OpenAI API key as environment variable for the agents library
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
 from agents import Agent, Runner
@@ -58,7 +58,8 @@ async def handle_game_changes(changes: List) -> None:
     full_prompt = (
         f"The following events just happened in the game:\n\n"
         f"{combined_prompt}\n\n"
-        f"Give a brief, snarky commentary on what just happened. Prioritizing on suggesting item builds."
+        f"Active Player's Champion: {memory.game_data.main_player.champion}"
+        f"Give a brief, snarky commentary on what just happened. Prioritizing on suggesting item builds for that champion."
         f"Be mean but helpful. Keep it short and punchy."
     )
 
