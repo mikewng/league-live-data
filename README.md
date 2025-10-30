@@ -1,3 +1,18 @@
+# Introduction
+This is a simple and goofy application that reads a person's live game data and passes into a better informed AI assistant that will guide you and also roast your gameplay progression. Connects player's live data on local port via a simple application that will constantly push the data every 2-5 seconds to the backend, in which does its core functionalities, including:
+- Formatting Live Client Data
+- Passing Changes in Live Client Data to OpenAI prompt through an authorized session
+- Utilizing matchup MVC github repos to obtain matchup stat data
+- Discord bot that uses TTS to relay ai text from backend via websockets
+
+TO DO:
+1. Add an onChange-Like function that detects changes in major live game data stats
+2. Integrate OpenAI agents or just regular chat API service functionality that fires every time there is a change
+3. Send output to discord bot via websocket
+    - Implement TTS functionality for bot
+4. Add op.gg MVC to check champion matchups for better context
+
+
 # Running Instructions
 
 ## Front End (Development)
@@ -5,6 +20,9 @@
 2. python -m venv venv -> venv\Scripts\activate
 3. pip install -r requirements
 4. run main.py (python -m main.py)
+
+## Back End (Development)
+1. python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 # Application Flow Chart
 <img width="1485" height="673" alt="image" src="https://github.com/user-attachments/assets/bd09e891-8caf-4339-9a0f-6e066e282da1" />

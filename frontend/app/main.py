@@ -69,25 +69,9 @@ class MainWindow(QMainWindow):
         layout.addSpacing(15)
 
         self.connect_button = QPushButton("Connect")
-        self.connect_button.clicked.connect(self.on_connect)
+        self.connect_button.clicked.connect(self.toggle_connection)
         self.connect_button.setMinimumHeight(40)
-        self.connect_button.setStyleSheet("""
-            QPushButton {
-                background-color: #0078d4;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                font-size: 14px;
-                font-weight: bold;
-                padding: 10px;
-            }
-            QPushButton:hover {
-                background-color: #106ebe;
-            }
-            QPushButton:pressed {
-                background-color: #005a9e;
-            }
-        """)
+        self.update_connect_button_style()
         layout.addWidget(self.connect_button)
 
         self.stream_button = QPushButton("Start Stream")
@@ -154,24 +138,47 @@ class MainWindow(QMainWindow):
     def hide_notification(self):
         self.notification_label.hide()
 
-    def on_connect(self):
-        self.secret_token = self.token_input.text()
+    def toggle_connection(self):
+        """Toggle between connected and disconnected states"""
+        if not self.is_connected:
+            self.secret_token = self.token_input.text()
 
-        if not self.secret_token:
-            self.show_notification("Please enter your secret token", "error")
-            return
+            if not self.secret_token:
+                self.show_notification("Please enter your secret token", "error")
+                return
 
-        result = establish_connection(self.username, self.secret_token)
+            result = establish_connection(self.username, self.secret_token)
 
-        if result.is_success():
-            self.is_connected = True
-            self.show_notification("Connected to backend successfully!", "success")
-            self.connect_button.setEnabled(False)
-            print(f"Connected as: {self.username}")
+            if result.is_success():
+                self.is_connected = True
+                self.connect_button.setText("Disconnect")
+                self.update_connect_button_style()
+                self.token_input.setEnabled(False)
+                self.show_notification("Connected to backend successfully!", "success")
+                print(f"Connected as: {self.username}")
+            else:
+                self.is_connected = False
+                self.show_notification(f"Connection failed: {result.error}", "error")
+                print(f"Error: {result.error}")
         else:
-            self.is_connected = False
-            self.show_notification(f"Connection failed: {result.error}", "error")
-            print(f"Error: {result.error}")
+            if self.is_streaming:
+                self.is_streaming = False
+                self.stream_button.setText("Start Stream")
+                self.api_timer.stop()
+                self.update_stream_button_style()
+
+            result = disconnect_session(self.username, self.secret_token)
+
+            if result.is_success():
+                self.is_connected = False
+                self.connect_button.setText("Connect")
+                self.update_connect_button_style()
+                self.token_input.setEnabled(True)
+                self.show_notification("Disconnected successfully", "info")
+                print("Disconnected from backend")
+            else:
+                self.show_notification(f"Disconnect failed: {result.error}", "warning")
+                print(f"Disconnect error: {result.error}")
 
     def toggle_stream(self):
         if self.is_connected:
@@ -201,6 +208,45 @@ class MainWindow(QMainWindow):
                 self.show_notification(f"Backend error: {backend_result.error}", "error")
         else:
             print(f"League API error: {league_result.error}")
+
+    def update_connect_button_style(self):
+        """Update connect button style based on connection state"""
+        if self.is_connected:
+            self.connect_button.setStyleSheet("""
+                QPushButton {
+                    background-color: #d13438;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    padding: 10px;
+                }
+                QPushButton:hover {
+                    background-color: #b02a2e;
+                }
+                QPushButton:pressed {
+                    background-color: #8e2124;
+                }
+            """)
+        else:
+            self.connect_button.setStyleSheet("""
+                QPushButton {
+                    background-color: #0078d4;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    padding: 10px;
+                }
+                QPushButton:hover {
+                    background-color: #106ebe;
+                }
+                QPushButton:pressed {
+                    background-color: #005a9e;
+                }
+            """)
 
     def update_stream_button_style(self):
         if self.is_streaming:
