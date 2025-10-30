@@ -7,6 +7,8 @@ from app.schemas.game_data import GameDataPayload
 import app.core.memory_data as memory
 from app.core.auth import validate_secret_token, validate_active_session
 from app.services.formatting_service import format_league_data
+from app.services.change_detection_service import change_detector
+from app.services.openai_service import handle_game_changes
 
 router = APIRouter()
 
@@ -52,6 +54,7 @@ async def disconnect(
 
     memory.current_session.isActive = False
     memory.game_data = None
+    change_detector.reset()
 
     return {
         "status": "disconnected",
@@ -65,14 +68,21 @@ async def ingest_game_json(
     payload: GameDataPayload,
     session: Session = Depends(validate_active_session)
 ):
-    # previous_game_data = memory.game_data
     game_data = format_league_data(payload)
+
+    changes = await change_detector.detect_changes(game_data)
+
+    if changes:
+        await handle_game_changes(changes)
+
+    memory.game_data = game_data
 
     response = {
         "status": "success",
         "message": "Data ingested successfully",
         "user": session.user,
         "game_status": game_data.game_status,
+        "changes_detected": len(changes),
     }
 
     return response

@@ -61,7 +61,6 @@ def format_league_data(payload: GameDataPayload) -> GameData:
     )
 
     update_game_data(game_data)
-    print(game_data.main_player.model_dump_json())
 
     return game_data
 
