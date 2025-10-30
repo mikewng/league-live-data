@@ -1,6 +1,10 @@
-fastapi==0.118.0
-uvicorn==0.37.0
-pydantic==2.7.0
-requests>=2.31.0
+# Backend dependencies
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+pydantic>=2.10.0
+pydantic-settings>=2.6.0
+
+# Frontend dependencies
 PyQt6>=6.6.0
+requests>=2.31.0
 urllib3>=2.1.0
