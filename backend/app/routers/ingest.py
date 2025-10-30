@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
+from fastapi.responses import Response
 from datetime import datetime, timezone
+from pydantic import BaseModel
 
 from app.schemas.auth import ConnectionRequest
 from app.schemas.session import Session
@@ -8,9 +10,14 @@ import app.core.memory_data as memory
 from app.core.auth import validate_secret_token, validate_active_session
 from app.services.formatting_service import format_league_data
 from app.services.change_detection_service import change_detector
-from app.services.openai_service import handle_game_changes
+from app.services.openai_service import handle_game_changes, text_to_speech
 
 router = APIRouter()
+
+
+class TTSRequest(BaseModel):
+    text: str
+    voice: str = "onyx"  # default voice
 
 # Checks if there is no active user, and then sets up a session for a user
 @router.post("/connection/establish")
@@ -86,3 +93,25 @@ async def ingest_game_json(
     }
 
     return response
+
+# Text-to-speech endpoint
+@router.post("/tts")
+async def generate_speech(
+    payload: TTSRequest,
+    session: Session = Depends(validate_active_session)
+):
+    try:
+        audio_content = await text_to_speech(payload.text, payload.voice)
+
+        return Response(
+            content=audio_content,
+            media_type="audio/mpeg",
+            headers={
+                "Content-Disposition": "inline; filename=speech.mp3"
+            }
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to generate speech: {str(e)}"
+        )

@@ -2,6 +2,7 @@ from typing import List
 import os
 from app.core.config import Settings
 import app.core.memory_data as memory
+from openai import AsyncOpenAI
 
 settings = Settings()
 
@@ -11,6 +12,8 @@ openai_model = settings.OPENAI_MODEL
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
 from agents import Agent, Runner
+
+openai_client = AsyncOpenAI(api_key=openai_api_key)
 
 league_game_agent = Agent(
     name="League of Legends Game Agent",
@@ -27,6 +30,21 @@ async def run_agent_prompt(prompt: str) -> str:
 
     result = await Runner.run(league_game_agent, prompt)
     return result.final_output
+
+
+async def text_to_speech(text: str, voice: str = "onyx") -> bytes:
+    try:
+        response = await openai_client.audio.speech.create(
+            model="tts-1",
+            voice=voice,
+            input=text,
+            response_format="mp3"
+        )
+
+        return response.content
+    except Exception as e:
+        print(f"Error generating speech: {e}")
+        raise
 
 
 async def handle_game_changes(changes: List) -> None:
