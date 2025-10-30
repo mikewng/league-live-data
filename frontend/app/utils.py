@@ -13,7 +13,7 @@ def league_live_api() -> Result:
         data = response.json()
 
         # test print
-        print(data['activePlayer']['currentGold'])
+        print("Got data? Current Gold:", data['activePlayer']['currentGold'])
 
         return Result.success(data=data)
     except Exception as e:

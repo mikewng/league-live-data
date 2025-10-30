@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication, QLineEdit, QWidget, QLabel, QPushButto
 from PyQt6.QtCore import QTimer
 
 from config import LEAGUE_LIVE_API, BACKEND_API
-from utils import league_live_api, establish_connection, send_to_backend
+from utils import league_live_api, establish_connection, send_to_backend, disconnect_session
 
 
 class MainWindow(QMainWindow):
@@ -15,6 +15,7 @@ class MainWindow(QMainWindow):
         self.is_connected = False
         self.is_streaming = False
         self.secret_token = ""
+        self.username = "Player"  # Default username
 
         # Timer for Sleeping on Loop
         self.api_timer = QTimer()
@@ -157,12 +158,20 @@ class MainWindow(QMainWindow):
         self.secret_token = self.token_input.text()
 
         if not self.secret_token:
-            self.show_notification("Please enter both username and token", "error")
+            self.show_notification("Please enter your secret token", "error")
             return
 
-        self.is_connected = True
-        self.show_notification(f"Connected to socket", "success")
-        print(f"Token: {'*' * len(self.secret_token)}")
+        result = establish_connection(self.username, self.secret_token)
+
+        if result.is_success():
+            self.is_connected = True
+            self.show_notification("Connected to backend successfully!", "success")
+            self.connect_button.setEnabled(False)
+            print(f"Connected as: {self.username}")
+        else:
+            self.is_connected = False
+            self.show_notification(f"Connection failed: {result.error}", "error")
+            print(f"Error: {result.error}")
 
     def toggle_stream(self):
         if self.is_connected:
@@ -182,9 +191,16 @@ class MainWindow(QMainWindow):
             self.show_notification("Please connect first before starting stream", "warning")
 
     def call_api(self):
-        data = league_live_api()
-        if (data.is_success()):
-            send_to_backend(data.data, self.secret_token)
+        league_result = league_live_api()
+
+        if league_result.is_success():
+            backend_result = send_to_backend(league_result.data, self.secret_token)
+
+            if not backend_result.is_success():
+                print(f"Backend error: {backend_result.error}")
+                self.show_notification(f"Backend error: {backend_result.error}", "error")
+        else:
+            print(f"League API error: {league_result.error}")
 
     def update_stream_button_style(self):
         if self.is_streaming:
@@ -223,6 +239,17 @@ class MainWindow(QMainWindow):
                     background-color: #0c5a0c;
                 }
             """)
+
+    def closeEvent(self, event):
+        """Called when the window is closing - cleanup connections"""
+        if self.is_connected:
+            print("Disconnecting from backend...")
+            disconnect_session(self.username, self.secret_token)
+
+        if self.is_streaming:
+            self.api_timer.stop()
+
+        event.accept()
         
 
 def main():
