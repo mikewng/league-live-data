@@ -1,6 +1,6 @@
 from typing import List, Dict, Any
 from pydantic import BaseModel
-from player_data import PlayerData
+from app.schemas.player_data import PlayerData
 
 class GameDataPayload(BaseModel):
     data: Dict[str, Any]

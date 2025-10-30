@@ -1,0 +1,312 @@
+{
+    "activePlayer": {
+      "abilities": {
+        "E": {
+          "abilityLevel": 0,
+          "displayName": "Soul Unbound",
+          "id": "YoneE",
+          "rawDescription": "GeneratedTip_Spell_YoneE_Description",
+          "rawDisplayName": "GeneratedTip_Spell_YoneE_DisplayName"
+        },
+        "Passive": {
+          "displayName": "Way of the Hunter",
+          "id": "YonePassive",
+          "rawDescription": "GeneratedTip_Passive_YonePassive_Description",
+          "rawDisplayName": "GeneratedTip_Passive_YonePassive_DisplayName"
+        },
+        "Q": {
+          "abilityLevel": 0,
+          "displayName": "Mortal Steel",
+          "id": "YoneQ",
+          "rawDescription": "GeneratedTip_Spell_YoneQ_Description",
+          "rawDisplayName": "GeneratedTip_Spell_YoneQ_DisplayName"
+        },
+        "R": {
+          "abilityLevel": 0,
+          "displayName": "Fate Sealed",
+          "id": "YoneR",
+          "rawDescription": "GeneratedTip_Spell_YoneR_Description",
+          "rawDisplayName": "GeneratedTip_Spell_YoneR_DisplayName"
+        },
+        "W": {
+          "abilityLevel": 0,
+          "displayName": "Spirit Cleave",
+          "id": "YoneW",
+          "rawDescription": "GeneratedTip_Spell_YoneW_Description",
+          "rawDisplayName": "GeneratedTip_Spell_YoneW_DisplayName"
+        }
+      },
+      "championStats": {
+        "abilityHaste": 8.0,
+        "abilityPower": 0.0,
+        "armor": 33.0,
+        "armorPenetrationFlat": 0.0,
+        "armorPenetrationPercent": 1.0,
+        "attackDamage": 69.19999694824219,
+        "attackRange": 175.0,
+        "attackSpeed": 0.625,
+        "bonusArmorPenetrationPercent": 1.0,
+        "bonusMagicPenetrationPercent": 1.0,
+        "critChance": 0.0,
+        "critDamage": 175.0,
+        "currentHealth": 630.0,
+        "healShieldPower": 0.0,
+        "healthRegenRate": 1.5,
+        "lifeSteal": 0.0,
+        "magicLethality": 0.0,
+        "magicPenetrationFlat": 0.0,
+        "magicPenetrationPercent": 1.0,
+        "magicResist": 32.0,
+        "maxHealth": 630.0,
+        "moveSpeed": 514.625,
+        "omnivamp": 0.0,
+        "physicalLethality": 0.0,
+        "physicalVamp": 0.0,
+        "resourceMax": 500.0,
+        "resourceRegenRate": 0.0,
+        "resourceType": "WIND",
+        "resourceValue": 0.0,
+        "spellVamp": 0.0,
+        "tenacity": 5.0
+      },
+      "currentGold": 917.1876220703125,
+      "fullRunes": {
+        "generalRunes": [
+          {
+            "displayName": "Electrocute",
+            "id": 8112,
+            "rawDescription": "perk_tooltip_Electrocute",
+            "rawDisplayName": "perk_displayname_Electrocute"
+          },
+          {
+            "displayName": "Cheap Shot",
+            "id": 8126,
+            "rawDescription": "perk_tooltip_CheapShot",
+            "rawDisplayName": "perk_displayname_CheapShot"
+          },
+          {
+            "displayName": "Sixth Sense",
+            "id": 8137,
+            "rawDescription": "perk_tooltip_SixthSense",
+            "rawDisplayName": "perk_displayname_SixthSense"
+          },
+          {
+            "displayName": "Ultimate Hunter",
+            "id": 8106,
+            "rawDescription": "perk_tooltip_UltimateHunter",
+            "rawDisplayName": "perk_displayname_UltimateHunter"
+          },
+          {
+            "displayName": "Absolute Focus",
+            "id": 8233,
+            "rawDescription": "perk_tooltip_8233",
+            "rawDisplayName": "perk_displayname_8233"
+          },
+          {
+            "displayName": "Gathering Storm",
+            "id": 8236,
+            "rawDescription": "perk_tooltip_GatheringStorm",
+            "rawDisplayName": "perk_displayname_GatheringStorm"
+          }
+        ],
+        "keystone": {
+          "displayName": "Electrocute",
+          "id": 8112,
+          "rawDescription": "perk_tooltip_Electrocute",
+          "rawDisplayName": "perk_displayname_Electrocute"
+        },
+        "primaryRuneTree": {
+          "displayName": "Domination",
+          "id": 8100,
+          "rawDescription": "perkstyle_tooltip_7200",
+          "rawDisplayName": "perkstyle_displayname_7200"
+        },
+        "secondaryRuneTree": {
+          "displayName": "Sorcery",
+          "id": 8200,
+          "rawDescription": "perkstyle_tooltip_7202",
+          "rawDisplayName": "perkstyle_displayname_7202"
+        },
+        "statRunes": [
+          {
+            "id": 5007,
+            "rawDescription": "perk_tooltip_StatModCooldownReductionScaling"
+          },
+          {
+            "id": 5008,
+            "rawDescription": "perk_tooltip_StatModAdaptive"
+          },
+          {
+            "id": 5001,
+            "rawDescription": "perk_tooltip_StatModHealthScaling"
+          }
+        ]
+      },
+      "level": 1,
+      "riotId": "JustAnothher#oker",
+      "riotIdGameName": "JustAnothher",
+      "riotIdTagLine": "oker",
+      "summonerName": "JustAnothher#oker",
+      "teamRelativeColors": true
+    },
+    "allPlayers": [
+      {
+        "championName": "Yone",
+        "isBot": false,
+        "isDead": false,
+        "items": [],
+        "level": 1,
+        "position": "NONE",
+        "rawChampionName": "game_character_displayname_Yone",
+        "rawSkinName": "game_character_skin_displayname_Yone_9",
+        "respawnTimer": 0.0,
+        "riotId": "JustAnothher#oker",
+        "riotIdGameName": "JustAnothher",
+        "riotIdTagLine": "oker",
+        "runes": {
+          "keystone": {
+            "displayName": "Electrocute",
+            "id": 8112,
+            "rawDescription": "perk_tooltip_Electrocute",
+            "rawDisplayName": "perk_displayname_Electrocute"
+          },
+          "primaryRuneTree": {
+            "displayName": "Domination",
+            "id": 8100,
+            "rawDescription": "perkstyle_tooltip_7200",
+            "rawDisplayName": "perkstyle_displayname_7200"
+          },
+          "secondaryRuneTree": {
+            "displayName": "Sorcery",
+            "id": 8200,
+            "rawDescription": "perkstyle_tooltip_7202",
+            "rawDisplayName": "perkstyle_displayname_7202"
+          }
+        },
+        "scores": {
+          "assists": 0,
+          "creepScore": 0,
+          "deaths": 0,
+          "kills": 0,
+          "wardScore": 0.0
+        },
+        "skinID": 9,
+        "skinName": "Spirit Blossom Yone",
+        "summonerName": "JustAnothher#oker",
+        "summonerSpells": {
+          "summonerSpellOne": {
+            "displayName": "Ghost",
+            "rawDescription": "GeneratedTip_SummonerSpell_SummonerHaste_Description",
+            "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerHaste_DisplayName"
+          },
+          "summonerSpellTwo": {
+            "displayName": "Flash",
+            "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+            "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+          }
+        },
+        "team": "ORDER"
+      },
+      {
+        "championName": "Master Yi",
+        "isBot": true,
+        "isDead": false,
+        "items": [
+          {
+            "canUse": false,
+            "consumable": false,
+            "count": 1,
+            "displayName": "Scorchclaw Pup",
+            "itemID": 1101,
+            "price": 450,
+            "rawDescription": "GeneratedTip_Item_1101_Description",
+            "rawDisplayName": "Item_1101_Name",
+            "slot": 0
+          },
+          {
+            "canUse": true,
+            "consumable": false,
+            "count": 1,
+            "displayName": "Stealth Ward",
+            "itemID": 3340,
+            "price": 0,
+            "rawDescription": "GeneratedTip_Item_3340_Description",
+            "rawDisplayName": "Item_3340_Name",
+            "slot": 6
+          }
+        ],
+        "level": 4,
+        "position": "JUNGLE",
+        "rawChampionName": "game_character_displayname_MasterYi",
+        "rawSkinName": "game_character_skin_displayname_MasterYi_0",
+        "respawnTimer": 0.0,
+        "riotId": "MasterYi#BOT",
+        "riotIdGameName": "MasterYi",
+        "riotIdTagLine": "BOT",
+        "runes": {
+          "keystone": {
+            "displayName": "Press the Attack",
+            "id": 8005,
+            "rawDescription": "perk_tooltip_PressTheAttack",
+            "rawDisplayName": "perk_displayname_PressTheAttack"
+          },
+          "primaryRuneTree": {
+            "displayName": "Precision",
+            "id": 8000,
+            "rawDescription": "perkstyle_tooltip_7201",
+            "rawDisplayName": "perkstyle_displayname_7201"
+          },
+          "secondaryRuneTree": {
+            "displayName": "Sorcery",
+            "id": 8200,
+            "rawDescription": "perkstyle_tooltip_7202",
+            "rawDisplayName": "perkstyle_displayname_7202"
+          }
+        },
+        "scores": {
+          "assists": 0,
+          "creepScore": 10,
+          "deaths": 0,
+          "kills": 0,
+          "wardScore": 0.3333333432674408
+        },
+        "skinID": 0,
+        "skinName": "",
+        "summonerName": "Master Yi Bot",
+        "summonerSpells": {
+          "summonerSpellOne": {
+            "displayName": "Flash",
+            "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+            "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+          },
+          "summonerSpellTwo": {
+            "displayName": "Smite",
+            "rawDescription": "GeneratedTip_SummonerSpell_SummonerSmite_Description",
+            "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerSmite_DisplayName"
+          }
+        },
+        "team": "CHAOS"
+      }
+    ],
+    "events": {
+      "Events": [
+        {
+          "EventID": 0,
+          "EventName": "GameStart",
+          "EventTime": 0.019417600706219673
+        },
+        {
+          "EventID": 1,
+          "EventName": "MinionsSpawning",
+          "EventTime": 65.04529571533203
+        }
+      ]
+    },
+    "gameData": {
+      "gameMode": "PRACTICETOOL",
+      "gameTime": 304.3016052246094,
+      "mapName": "Map11",
+      "mapNumber": 11,
+      "mapTerrain": "Default"
+    }
+  }
