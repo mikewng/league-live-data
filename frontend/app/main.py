@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication, QLineEdit, QWidget, QLabel, QPushButto
 from PyQt6.QtCore import QTimer
 
 from config import LEAGUE_LIVE_API, BACKEND_API
-from utils import league_live_api, send_to_backend
+from utils import league_live_api, establish_connection, send_to_backend
 
 
 class MainWindow(QMainWindow):
