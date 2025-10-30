@@ -11,6 +11,7 @@ TO DO:
 3. Send output to discord bot via websocket
     - Implement TTS functionality for bot
 4. Add op.gg MVC to check champion matchups for better context
+5. Save GameData into a SQL Database once a user finishes a game or disconnects from the API
 
 
 # Running Instructions
