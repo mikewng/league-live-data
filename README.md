@@ -8,10 +8,26 @@ This is a simple and goofy application that reads a person's live game data and 
 TO DO:
 1. Add an onChange-Like function that detects changes in major live game data stats - DONE
 2. Integrate OpenAI agents or just regular chat API service functionality that fires every time there is a change - DONE
-3. Send output to discord bot via websocket
-    - Implement TTS functionality for bot
+3. Send output to discord bot via websocket - DONE
+    - Implement TTS functionality for bot - DONE
 4. Add op.gg MVC to check champion matchups for better context
 5. Save GameData into a SQL Database once a user finishes a game or disconnects from the API
+
+## Discord Bot TTS Integration
+
+The application now includes a Discord bot that receives AI commentary via WebSocket and plays it as TTS audio in voice channels!
+
+**Setup Instructions:** See [DISCORD_SETUP.md](DISCORD_SETUP.md) for complete setup guide.
+
+**Quick Start:**
+1. Install bot dependencies: `cd bot && pip install -r requirements.txt`
+2. Install FFmpeg (required for voice): https://ffmpeg.org/download.html
+3. Create Discord bot and get token: https://discord.com/developers/applications
+4. Configure `bot/.env` with your Discord token
+5. Start backend: `python -m uvicorn app.main:app --reload`
+6. Start bot: `cd bot && python bot.py`
+7. In Discord: `/connect_vc` to join voice channel
+8. Play League and listen to AI roast you live!
 
 
 # Running Instructions

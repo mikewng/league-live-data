@@ -1,0 +1,13 @@
+# Discord bot with voice support
+py-cord>=2.4.0
+PyNaCl>=1.5.0  # Required for voice support
+python-dotenv>=1.0.0
+
+# WebSocket client
+websockets>=12.0
+
+# Audio handling
+aiohttp>=3.9.0
+
+# HTTP requests
+requests>=2.31.0

@@ -1,5 +1,4 @@
 from typing import List
-import os
 from app.core.config import Settings
 import app.core.memory_data as memory
 from openai import AsyncOpenAI
@@ -9,27 +8,35 @@ settings = Settings()
 openai_api_key = settings.OPENAI_API_KEY
 openai_model = settings.OPENAI_MODEL
 
-os.environ["OPENAI_API_KEY"] = openai_api_key
-
-from agents import Agent, Runner
-
 openai_client = AsyncOpenAI(api_key=openai_api_key)
 
-league_game_agent = Agent(
-    name="League of Legends Game Agent",
-    instructions=
-        "You are a game stats agent for League of Legends that is very mean, and you will be given live game stats data of a match. " \
-        "Go out of your way to roast and criticize the player whenever you get the chance to, but still give good advice. Use your given tools when appropriate. " \
-        "Keep your responses concise and punchy - 2-3 sentences max. Focus on the most important aspects of what just happened.",
-    model=openai_model,
+# System prompt for the League of Legends commentary agent
+LEAGUE_AGENT_SYSTEM_PROMPT = (
+    "You are a game stats agent for League of Legends that is very mean, and you will be given live game stats data of a match. "
+    "Go out of your way to roast and criticize the player whenever you get the chance to, but still give good advice. "
+    "Keep your responses concise and punchy - 2-3 sentences max. Focus on the most important aspects of what just happened."
 )
 
 async def run_agent_prompt(prompt: str) -> str:
-    if (prompt is None or prompt == ""):
-        return "I am at a lost for words. You just suck."
+    """Run OpenAI chat completion for League commentary"""
+    if not prompt:
+        return "I am at a loss for words. You just suck."
 
-    result = await Runner.run(league_game_agent, prompt)
-    return result.final_output
+    try:
+        response = await openai_client.chat.completions.create(
+            model=openai_model,
+            messages=[
+                {"role": "system", "content": LEAGUE_AGENT_SYSTEM_PROMPT},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=150,
+            temperature=0.9
+        )
+
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"Error calling OpenAI API: {e}")
+        return "Error generating commentary. But honestly, you're probably doing terribly anyway."
 
 
 async def text_to_speech(text: str, voice: str = "onyx") -> bytes:
@@ -49,6 +56,7 @@ async def text_to_speech(text: str, voice: str = "onyx") -> bytes:
 
 async def handle_game_changes(changes: List) -> None:
     from app.services.change_detection_service import ChangeEvent, ChangeType
+    from app.core.websocket_manager import ws_manager
 
     if not changes:
         return
@@ -91,6 +99,12 @@ async def handle_game_changes(changes: List) -> None:
         print(f"AI AGENT RESPONSE:")
         print(f"{response}")
         print(f"{'='*60}\n")
+
+        # Generate TTS audio
+        audio_content = await text_to_speech(response, voice="onyx")
+
+        # Send TTS event with audio to Discord bot via WebSocket
+        await ws_manager.broadcast_tts_event(text=response, audio_content=audio_content, voice="onyx")
 
         return response
     except Exception as e:

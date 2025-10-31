@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import ingest
+from .routers import ingest, websocket
 
 app = FastAPI(
     title="League Live Data API",
@@ -18,6 +18,7 @@ app.add_middleware(
 )
 
 app.include_router(ingest.router, prefix="/api", tags=["ingest"])
+app.include_router(websocket.router, tags=["websocket"])
 
 @app.get("/")
 async def root():
