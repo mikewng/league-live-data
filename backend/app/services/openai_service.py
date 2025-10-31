@@ -76,8 +76,11 @@ async def handle_game_changes(changes: List) -> None:
     full_prompt = (
         f"The following events just happened in the game:\n\n"
         f"{combined_prompt}\n\n"
-        f"Active Player's Champion: {memory.game_data.main_player.champion}"
-        f"Give a brief, snarky commentary on what just happened. Prioritizing on suggesting item builds for that champion."
+        f"Give a brief, snarky commentary on what just happened. Prioritizing on suggesting item builds for the active player and their champion:\n\n"
+        f"Active Player's Username: {memory.game_data.main_player.name}\n\n"
+        f"Active Player's Champion: {memory.game_data.main_player.champion}\n\n"
+        f"Current Items: {memory.game_data.main_player.current_items}"
+        f"Enemy Champions: {[enemy.name for enemy in memory.game_data.enemy_players]}"
         f"Be mean but helpful. Keep it short and punchy."
     )
 
